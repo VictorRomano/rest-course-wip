@@ -1,10 +1,27 @@
 package com.victorromano.restcourse.model;
 
+import javax.persistence.*;
+
+@NamedQueries({
+        @NamedQuery(name = "Book.findAll",
+                    query = "select b from Book b"),
+        @NamedQuery(name = "Book.findById",
+                    query = "select b from Book b where b.id = :id")
+})
+@Entity
+@Table(name = "books")
 public class Book {
 
+    @Id
+    @GeneratedValue
     private Integer id;
     private String title;
     private String author;
+
+    @Deprecated
+    public Book() {
+        // Required by JPA
+    }
 
     public Book(Integer id, String title, String author) {
         this.id = id;

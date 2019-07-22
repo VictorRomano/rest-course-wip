@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController("/books")
 public class BookController {
 
     private BookRepository bookRepository;
@@ -25,7 +25,7 @@ public class BookController {
         return bookRepository.findAll();
     }
 
-    @RequestMapping(path = "findById", method = RequestMethod.POST)
+    @RequestMapping(path = "/findById", method = RequestMethod.POST)
     public Book findById(@RequestBody Book book) {
         return bookRepository.findById(book);
     }

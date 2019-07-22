@@ -3,15 +3,12 @@ package com.victorromano.restcourse.controller;
 import com.victorromano.restcourse.model.Book;
 import com.victorromano.restcourse.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("books")
+@RequestMapping("/books")
 public class BookController {
 
     private BookRepository bookRepository;
@@ -21,31 +18,31 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
-    @RequestMapping(path = "/findAll", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.GET)
     public List<Book> findAll() {
         return bookRepository.findAll();
     }
 
-    @RequestMapping(path = "/findById", method = RequestMethod.POST)
-    public Book findById(@RequestBody Book book) {
-        return bookRepository.findById(book);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Book findById(@PathVariable("id") Integer id) {
+        return bookRepository.findById(id);
     }
 
-    @RequestMapping(path = "/save", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public Book save(@RequestBody Book book) {
         bookRepository.save(book);
         return book;
     }
 
-    @RequestMapping(path = "/update", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     public Book update(@RequestBody Book book) {
         bookRepository.save(book);
         return book;
     }
 
-    @RequestMapping(path = "/delete", method = RequestMethod.POST)
-    public void delete(@RequestBody Book book) {
-        bookRepository.delete(book);
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") Integer id) {
+        bookRepository.delete(id);
     }
 
 }

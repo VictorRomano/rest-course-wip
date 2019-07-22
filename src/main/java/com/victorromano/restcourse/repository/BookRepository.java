@@ -8,10 +8,13 @@ public interface BookRepository {
 
     List<Book> findAll();
 
+    @Deprecated
     Book findById(Book book);
+
+    Book findById(Integer id);
 
     Book save(Book book);
 
-    void delete(Book book);
+    void delete(Integer id);
 
 }

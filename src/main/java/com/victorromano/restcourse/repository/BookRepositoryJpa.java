@@ -36,6 +36,14 @@ public class BookRepositoryJpa implements BookRepository {
     }
 
     @Override
+    public Book findById(Integer id) {
+        return entityManager
+                .createNamedQuery("Book.findById", Book.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    @Override
     @Transactional
     public Book save(Book book) {
         if (book.getId() == null) {
@@ -48,8 +56,9 @@ public class BookRepositoryJpa implements BookRepository {
 
     @Override
     @Transactional
-    public void delete(Book book) {
-        Book bookToDelete = entityManager.find(Book.class, book.getId());
+    public void delete(Integer id) {
+        Book bookToDelete = entityManager.find(Book.class, id);
         entityManager.remove(bookToDelete);
     }
+
 }

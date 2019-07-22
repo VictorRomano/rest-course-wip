@@ -35,14 +35,19 @@ public class BookRepositoryInMemory implements BookRepository {
     }
 
     @Override
+    public Book findById(Integer id) {
+        return null;
+    }
+
+    @Override
     public Book save(Book book) {
         books.put(book.getId(), book);
         return book;
     }
 
     @Override
-    public void delete(Book book) {
-        books.remove(book.getId());
+    public void delete(Integer id) {
+        books.remove(id);
     }
 
 }

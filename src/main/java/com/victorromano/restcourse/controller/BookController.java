@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController("/books")
+@RestController
+@RequestMapping("books")
 public class BookController {
 
     private BookRepository bookRepository;

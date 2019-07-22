@@ -18,29 +18,29 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public List<Book> findAll() {
         return bookRepository.findAll();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public Book findById(@PathVariable("id") Integer id) {
         return bookRepository.findById(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public Book save(@RequestBody Book book) {
         bookRepository.save(book);
         return book;
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping
     public Book update(@RequestBody Book book) {
         bookRepository.save(book);
         return book;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") Integer id) {
         bookRepository.delete(id);
     }

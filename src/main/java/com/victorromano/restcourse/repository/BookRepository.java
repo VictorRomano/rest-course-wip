@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BookRepository {
 
-    List<Book> findAll();
+    List<Book> findAll(String title);
 
     @Deprecated
     Book findById(Book book);

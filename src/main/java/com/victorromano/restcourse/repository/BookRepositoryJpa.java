@@ -6,6 +6,11 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -21,10 +26,18 @@ public class BookRepositoryJpa implements BookRepository {
     }
 
     @Override
-    public List<Book> findAll() {
-        return entityManager
-                .createNamedQuery("Book.findAll", Book.class)
-                .getResultList();
+    public List<Book> findAll(String title) {
+        String query = "select b from Book b";
+        if (title != null) {
+            query = query + " where b.title = :title";
+        }
+
+        TypedQuery<Book> typedQuery = entityManager.createQuery(query, Book.class);
+        if (title != null) {
+            typedQuery.setParameter("title", title);
+        }
+
+        return typedQuery.getResultList();
     }
 
     @Override

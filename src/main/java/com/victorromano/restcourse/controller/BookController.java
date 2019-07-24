@@ -22,10 +22,10 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Book>> findAll() {
+    public ResponseEntity<List<Book>> findAll(String title) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(bookRepository.findAll());
+                .body(bookRepository.findAll(title));
     }
 
     @GetMapping(value = "/{id}")

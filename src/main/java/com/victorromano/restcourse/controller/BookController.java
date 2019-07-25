@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> save(@RequestBody Book book) {
+    public ResponseEntity<Book> save(@RequestBody @Valid Book book) {
         bookRepository.save(book);
         return ResponseEntity
                 .created(URI.create("/books/" + book.getId()))

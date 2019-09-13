@@ -23,6 +23,10 @@ public class Book {
     @NotEmpty(message = "Author can't be empty")
     private String author;
 
+    @ManyToOne
+    @JoinColumn(name = "library_id")
+    private Library library;
+
     @Deprecated
     public Book() {
         // Required by JPA

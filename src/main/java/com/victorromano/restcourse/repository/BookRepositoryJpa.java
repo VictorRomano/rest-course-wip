@@ -15,63 +15,63 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Primary
-@Repository
-public class BookRepositoryJpa implements BookRepository {
+//@Repository
+public class BookRepositoryJpa {
 
-    private EntityManager entityManager;
-
-    @Autowired
-    public BookRepositoryJpa(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
-    @Override
-    public List<Book> findAll(String title) {
-        String query = "select b from Book b";
-        if (title != null) {
-            query = query + " where b.title = :title";
-        }
-
-        TypedQuery<Book> typedQuery = entityManager.createQuery(query, Book.class);
-        if (title != null) {
-            typedQuery.setParameter("title", title);
-        }
-
-        return typedQuery.getResultList();
-    }
-
-    @Override
-    public Book findById(Book book) {
-        return entityManager
-                .createNamedQuery("Book.findById", Book.class)
-                .setParameter("id", book.getId())
-                .getSingleResult();
-    }
-
-    @Override
-    public Book findById(Integer id) {
-        return entityManager
-                .createNamedQuery("Book.findById", Book.class)
-                .setParameter("id", id)
-                .getSingleResult();
-    }
-
-    @Override
-    @Transactional
-    public Book save(Book book) {
-        if (book.getId() == null) {
-            entityManager.persist(book);
-            return book;
-        } else {
-            return entityManager.merge(book);
-        }
-    }
-
-    @Override
-    @Transactional
-    public void delete(Integer id) {
-        Book bookToDelete = entityManager.find(Book.class, id);
-        entityManager.remove(bookToDelete);
-    }
+//    private EntityManager entityManager;
+//
+//    @Autowired
+//    public BookRepositoryJpa(EntityManager entityManager) {
+//        this.entityManager = entityManager;
+//    }
+//
+//    @Override
+//    public List<Book> findAll(String title) {
+//        String query = "select b from Book b";
+//        if (title != null) {
+//            query = query + " where b.title = :title";
+//        }
+//
+//        TypedQuery<Book> typedQuery = entityManager.createQuery(query, Book.class);
+//        if (title != null) {
+//            typedQuery.setParameter("title", title);
+//        }
+//
+//        return typedQuery.getResultList();
+//    }
+//
+//    @Override
+//    public Book findById(Book book) {
+//        return entityManager
+//                .createNamedQuery("Book.findById", Book.class)
+//                .setParameter("id", book.getId())
+//                .getSingleResult();
+//    }
+//
+//    @Override
+//    public Book findById(Integer id) {
+//        return entityManager
+//                .createNamedQuery("Book.findById", Book.class)
+//                .setParameter("id", id)
+//                .getSingleResult();
+//    }
+//
+//    @Override
+//    @Transactional
+//    public Book save(Book book) {
+//        if (book.getId() == null) {
+//            entityManager.persist(book);
+//            return book;
+//        } else {
+//            return entityManager.merge(book);
+//        }
+//    }
+//
+//    @Override
+//    @Transactional
+//    public void delete(Integer id) {
+//        Book bookToDelete = entityManager.find(Book.class, id);
+//        entityManager.remove(bookToDelete);
+//    }
 
 }
